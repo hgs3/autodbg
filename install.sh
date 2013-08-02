@@ -6,7 +6,6 @@ if [[ $UID != 0 ]]; then
     exit 1
 fi
 
-chmod +x autodbg
 
 # Apples performTaskWithPathArgumentsTimeout requires you to give the full
 # path to the script you'd like to run.  Its easier to reference the script
