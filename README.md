@@ -5,15 +5,17 @@ A JavaScript debugger/REPL for Apple UI Automation.
 ## Purpose
 
 The UI Automation framework Apple provides does not come with a debugger.  The best you can do when debugging your JavaScript is to use UIALogger.logDebug (and friends) to print messages to the Instruments console.
-This is limited and time-consuming.  This purpose of this project is to develop a debugger that can be used with Apples UI Automation framework.
+This is limited and time-consuming.  The purpose of this project is to develop a debugger that can be used with Apples UI Automation framework.
 
 ## Installing
 
-Simply clone the repository to your system, open a terminal, navigate to the repo, and enter the following command:
+Clone the repository to your system, open a terminal, navigate to the repo, and enter the following command:
 
-    ./install.sh
+    sudo ./install.sh
 
-## Running
+This will install the debugger.  Sudo is needed because the script installs to /usr/local/bin.  The reason we install there is because Apples performTaskWithPathArgumentsTimeout function requires you to specify the full path to the external script.  Installing the script to /usr/local/bin makes it easier to reference.
+
+## Usage
 
 1. Import debugger.js into your JavaScript source file.
 
@@ -27,9 +29,9 @@ Simply clone the repository to your system, open a terminal, navigate to the rep
 
         autodbg
 
-4. Run your automation test as usual.  When a breakpoint is called, the terminal you launched the debugger in (in step #3) will allow you to enter JavaScript code and execute it.  You will know its OK to start entering code in the debugger when you see a right arrow **>** appear.
+4. Run your automation test as usual.  When a breakpoint is hit, the terminal you launched the debugger in (in step #3) will allow you to enter JavaScript code to execute.  You will know its OK to start entering code in the debugger when you see a right arrow ```>``` appear.
 
-When your ready to continue execution of your test, type "exit" in the debugger.
+When your ready to continue execution of your test, type ```exit``` in the debugger.
 
 ## FAQ
 
