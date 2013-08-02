@@ -35,11 +35,11 @@ When your ready to continue execution of your test, type ```exit``` in the debug
 
 ## FAQ
 
-Q: I receive the following debug message when I execute my script: *Debugger error: python: can't open file '/usr/local/bin/debugframe.py': [Errno 2] No such file or directory.*
+Q: I receive the following debug message when I execute my script: ```Debugger error: python: can't open file '/usr/local/bin/debugframe.py': [Errno 2] No such file or directory.```
 
 A: Make sure you run the installation script first.  See the **Installing** section for details.
 
-Q: I receive the following debug message when I call eval(breakpoint): *Debugger error: [Errno 61] Connection refused*
+Q: I receive the following debug message when I call eval(breakpoint): ```Debugger error: [Errno 61] Connection refused```
 
 A: You may see this message if you have not started a debugging session or killed an existing one.  See the **Running** section of this README for details on how to launch the debugger.
 
