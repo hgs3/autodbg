@@ -41,7 +41,7 @@ A: Make sure you run the installation script first.  See the **Installing** sect
 
 Q: I receive the following debug message when I call eval(breakpoint): ```Debugger error: [Errno 61] Connection refused```
 
-A: You may see this message if you have not started a debugging session or killed an existing one.  See the **Running** section of this README for details on how to launch the debugger.
+A: You may see this message if you have not started a debugging session or killed an existing one.  See the **Usage** section of this README for details on how to launch the debugger.
 
 Q: Do I have to restart the debugger between test runs?
 
