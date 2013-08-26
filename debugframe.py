@@ -37,21 +37,24 @@ TCP_IP = '127.0.0.1'
 TCP_PORT = 5005
 BUFFER_SIZE = 1024
 
-# When creating a conection to our remote debugger, we want to first give it 
+
+# When creating a conection to our remote debugger, we want to first give it
 # the result of the last debug command.
 #
 # There should _always_ be a result.
-if len(sys.argv) != 2:
-    sys.stderr.write('Expected a previous result.')
+if len(sys.argv) != 3:
+    sys.stderr.write('Expected a previous result and breakpoint name.')
     sys.exit(1)
 
 previous_result = sys.argv[1]
+breakpoint_name = sys.argv[2]
+
 try:
     # Open a connection to our remote debugger and send it the result
     # of the previous command.
     debugger_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     debugger_socket.connect((TCP_IP, TCP_PORT))
-    debugger_socket.send(previous_result)
+    debugger_socket.send(previous_result + '\n' + breakpoint_name)
 
     # Block until we get some code from the remote debugger.
     data = debugger_socket.recv(BUFFER_SIZE)

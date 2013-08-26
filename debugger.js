@@ -20,37 +20,41 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-// This code launches our debugframe.py which communicates with our remote debugger.
-// You might be wondering why this is a string and why we eval() it.  The reason
-// is simple: In order to allow our debugger access to local variables, we
-// need to eval() the code rather than call it as a function().
-breakpoint = "(function() {" +
-    "var previousResult = undefined;" +
-    "var CONTINUE_CMD = 'exit';" +
-    "for(;;) {" +
-        "try {" +
-            "var result = UIATarget.localTarget().host().performTaskWithPathArgumentsTimeout('/usr/bin/env', ['python', '/usr/local/bin/debugframe.py', \"'\"+previousResult+\"'\"], 60 * 10);" +
-            "if (result.exitCode) {" +
-                "UIALogger.logDebug('Debugger error: ' + result.stderr);" +
-                "return;" +
+
+function breakpoint(name) {
+    name = (name == undefined || name == null) ? "unnamed" : name.toString();
+
+    // This code launches our debugframe.py which communicates with our remote debugger.
+    // You might be wondering why this is a string and why we eval() it.  The reason
+    // is simple: In order to allow our debugger access to local variables, we
+    // need to eval() the code rather than call it as a function().  Whatever is eval()'d
+    // will exist in the same scope as the eval() itself.
+    return "(function() {" +
+        "var previousResult = undefined;" +
+        "var CONTINUE_CMD = 'cont';" +
+        "for(;;) {" +
+            "try {" +
+                "var result = UIATarget.localTarget().host().performTaskWithPathArgumentsTimeout('/usr/bin/env', ['python', '/usr/local/bin/debugframe.py', \"'\"+previousResult+\"'\", '" + name + "'], 60 * 10);" +
+                "if (result.exitCode) {" +
+                    "UIALogger.logDebug('Debugger error: ' + result.stderr);" +
+                    "return;" +
+                "}" +
+                "if (result.stdout == CONTINUE_CMD) {" +
+                    "return;" +
+                "}" +
+                "UIATarget.localTarget().pushTimeout(1);" +
+                "var evalResult = eval(result.stdout);" +
+                "UIATarget.localTarget().popTimeout();" +
+                "if (evalResult) {" +
+                    "previousResult = evalResult.toString();" +
+                "}" +
+                "else {" +
+                    "previousResult = '(null)';" +
+                "}" +
             "}" +
-            "if (result.stdout == CONTINUE_CMD) {" +
-                "return;" +
-            "}" +
-            "UIATarget.localTarget().pushTimeout(1);" +
-            "var evalResult = eval(result.stdout);" +
-            "UIATarget.localTarget().popTimeout();" +
-            "if (evalResult) {" +
-                "previousResult = evalResult.toString();" +
-            "}" +
-            "else {" +
-                "previousResult = '(null)';" +
+            "catch(error) {" +
+                "previousResult = error;" +
             "}" +
         "}" +
-        "catch(error) {" +
-            "previousResult = error;" +
-        "}" +
-    "}" +
-"})()";
-
-
+    "})()";
+}

@@ -21,9 +21,11 @@ This will install the debugger.  Sudo is needed because the script installs to /
 
         #import "debugger.js"
 
-2. Call eval(breakpoint); in your test were you would like to have a breakpoint.  You can add as many breakpoints as you want.
+2. Call eval(breakpoint()); in your test were you would like to have a breakpoint.  You can add as many breakpoints as you want.  You can also optionally name them.
 
-        eval(breakpoint);
+        eval(breakpoint());
+        eval(breakpoint('my_breakpoint'));
+        eval(breakpoint(123));
 
 3. Start a debug session by opening a terminal and entering:
 
@@ -39,7 +41,7 @@ Q: I receive the following debug message when I execute my script: ```Debugger e
 
 A: Make sure you run the installation script first.  See the **Installing** section for details.
 
-Q: I receive the following debug message when I call eval(breakpoint): ```Debugger error: [Errno 61] Connection refused```
+Q: I receive the following debug message when I call eval(breakpoint()): ```Debugger error: [Errno 61] Connection refused```
 
 A: You may see this message if you have not started a debugging session or killed an existing one.  See the **Usage** section of this README for details on how to launch the debugger.
 
