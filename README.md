@@ -33,7 +33,7 @@ This will install the debugger.  Sudo is needed because the script installs to /
 
 4. Run your automation test as usual.  When a breakpoint is hit, the terminal you launched the debugger in (in step #3) will allow you to enter JavaScript code to execute.  You will know its OK to start entering code in the debugger when you see a right arrow ```>``` appear.
 
-When your ready to continue execution of your test, type ```exit``` in the debugger.
+When your ready to continue execution of your test, type ```cont``` in the debugger.
 
 ## FAQ
 
