@@ -1,6 +1,6 @@
 # autodbg
 
-A JavaScript debugger/REPL for Apple UI Automation.
+A JavaScript debugger/REPL for Apple UI Automation.  It has been tested against iOS 6 and 7.
 
 ## Purpose
 
@@ -11,9 +11,11 @@ This is limited and time-consuming.  The purpose of this project is to develop a
 
 Clone the repository to your system, open a terminal, navigate to the repo, and enter the following command:
 
-    sudo ./install.sh
+    ./install.sh
 
-This will install the debugger.  Sudo is needed because the script installs to /usr/local/bin.  The reason we install there is because Apples performTaskWithPathArgumentsTimeout function requires you to specify the full path to the external script.  Installing the script to /usr/local/bin makes it easier to reference.
+This will install the debugger.  To uninstall, simply enter:
+
+    ./uninstall.sh
 
 ## Usage
 
@@ -21,7 +23,7 @@ This will install the debugger.  Sudo is needed because the script installs to /
 
         #import "debugger.js"
 
-2. Call eval(breakpoint()); in your test were you would like to have a breakpoint.  You can add as many breakpoints as you want.  You can also optionally name them.
+2. Call eval(breakpoint()); in your test where you would like to have a breakpoint.  You can add as many breakpoints as you want.  You can also optionally name them.
 
         eval(breakpoint());
         eval(breakpoint('my_breakpoint'));
@@ -47,7 +49,7 @@ A: You may see this message if you have not started a debugging session or kille
 
 Q: Do I have to restart the debugger between test runs?
 
-A: No, when a test stops, you may leave the debugger running.
+A: No, when a test completes, you may leave the debugger running.
 
 ## Contributing
 
